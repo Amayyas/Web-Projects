@@ -1,0 +1,358 @@
+/* Variables de couleurs */
+:root {
+    --primary-color: #4c6ef5;
+    --secondary-color: #364fc7;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-bg: #fff;
+    --white: #fff;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
+    --success: #38b2ac;
+    --danger: #e53e3e;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --item-shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+    --input-bg: #f8f9fa;
+    --result-bg: #f0f7ff;
+    --feature-card-bg: #f8f9fa;
+}
+
+/* Variables du thème sombre */
+[data-theme="dark"] {
+    --primary-color: #63b3ed;
+    --secondary-color: #4299e1;
+    --text-color: #f8f9fa;
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --white: #2d3748;
+    --gray: #cbd5e0;
+    --light-gray: #4a5568;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --item-shadow: rgba(255, 255, 255, 0.05);
+    --input-bg: #4a5568;
+    --result-bg: #3a506b;
+    --feature-card-bg: #2d3748;
+}
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin-right: 15px;
+}
+
+/* Bouton de changement de thème */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+}
+
+/* Style de la carte de conversion */
+.converter-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px var(--shadow);
+    padding: 30px;
+    margin-bottom: 40px;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Style de l'entrée du montant */
+.amount-input {
+    margin-bottom: 20px;
+}
+
+.amount-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.amount-input input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.amount-input input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2);
+}
+
+/* Style du conteneur de devises */
+.currency-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.from-currency, .to-currency {
+    flex: 1;
+}
+
+.from-currency label, .to-currency label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.select-container {
+    position: relative;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 12px 35px 12px 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.select-container select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2);
+}
+
+.select-container i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    pointer-events: none;
+}
+
+/* Style du bouton d'échange */
+.swap-button {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.swap-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: rotate(180deg);
+}
+
+/* Style du bouton de conversion */
+.convert-button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 25px;
+}
+
+.convert-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Style des résultats */
+.result {
+    background-color: var(--result-bg);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.result-value {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.converted-amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.last-updated {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+/* Style des fonctionnalités */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    background-color: var(--feature-card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px var(--shadow);
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+/* Style de l'historique des taux */
+.exchange-history {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px var(--shadow);
+    padding: 30px;
+    margin-bottom: 40px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.exchange-history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.history-chart-container {
+    width: 100%;
+    height: 300px;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .currency-container {
+        flex-direction: column;
+    }
+    
+    .from-currency, .to-currency {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .swap-button {
+        margin: 10px auto;
+        transform: rotate(90deg);
+    }
+    
+    .swap-button:hover {
+        transform: rotate(270deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .converter-card, .exchange-history {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .converted-amount {
+        font-size: 1.5rem;
+    }
+}
