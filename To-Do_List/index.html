@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>To-Do List</h1>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+        
+        <form id="task-form">
+            <div class="form-input">
+                <input type="text" id="task-input" placeholder="Ajouter une tâche..." required>
+                <button type="submit" id="add-button">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </form>
+        
+        <div class="task-filters">
+            <button class="filter-btn active" data-filter="all">Toutes</button>
+            <button class="filter-btn" data-filter="pending">À faire</button>
+            <button class="filter-btn" data-filter="completed">Terminées</button>
+        </div>
+
+        <ul id="task-list">
+            <!-- Les tâches seront ajoutées ici dynamiquement -->
+        </ul>
+
+        <div class="task-stats">
+            <span id="pending-tasks">0 tâches restantes</span>
+            <button id="clear-completed">Supprimer les tâches terminées</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
