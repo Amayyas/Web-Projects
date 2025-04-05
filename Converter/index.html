@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur de Devises</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Convertisseur de Devises</h1>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+        
+        <div class="converter-card">
+            <div class="amount-input">
+                <label for="amount">Montant</label>
+                <input type="number" id="amount" placeholder="Entrez un montant" value="1">
+            </div>
+            
+            <div class="currency-container">
+                <div class="from-currency">
+                    <label for="from-currency">De</label>
+                    <div class="select-container">
+                        <select id="from-currency">
+                            <!-- Les options seront générées par JavaScript -->
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                
+                <button id="swap-button" class="swap-button">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
+                
+                <div class="to-currency">
+                    <label for="to-currency">À</label>
+                    <div class="select-container">
+                        <select id="to-currency">
+                            <!-- Les options seront générées par JavaScript -->
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="convert-button" class="convert-button">
+                Convertir
+            </button>
+            
+            <div id="result" class="result">
+                <div class="result-value">1 EUR = <span id="conversion-rate">1.10 USD</span></div>
+                <div class="converted-amount">
+                    <span id="base-amount">1 EUR</span> = <span id="target-amount">1.10 USD</span>
+                </div>
+                <div class="last-updated">
+                    Dernière mise à jour: <span id="last-update">Chargement...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-sync-alt"></i>
+                <h3>Taux en temps réel</h3>
+                <p>Données actualisées des marchés financiers mondiaux</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-globe"></i>
+                <h3>Multiples devises</h3>
+                <p>Plus de 150 devises du monde entier</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-history"></i>
+                <h3>Historique</h3>
+                <p>Consultez l'évolution des taux de change</p>
+            </div>
+        </div>
+        
+        <div class="exchange-history" id="exchange-history">
+            <h2>Historique des taux</h2>
+            <div class="history-chart-container">
+                <canvas id="history-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Convertisseur de Devises | Développé par Amayyas</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
