@@ -8,8 +8,6 @@ Bienvenue dans mon repository contenant divers projets web interactifs développ
 
 Une application web moderne permettant de convertir facilement entre différentes devises mondiales.
 
-![Convertisseur de Devises](https://via.placeholder.com/600x300?text=Convertisseur+de+Devises)
-
 #### Fonctionnalités principales
 - Conversion en temps réel avec des taux de change actualisés
 - Support de plus de 20 devises majeures
@@ -22,8 +20,6 @@ Une application web moderne permettant de convertir facilement entre différente
 ### 2. [To-Do List](./To-Do_List/)
 
 Une application web de gestion de tâches moderne pour organiser efficacement votre quotidien.
-
-![To-Do List](https://via.placeholder.com/600x300?text=To-Do+List)
 
 #### Fonctionnalités principales
 - Ajout, modification et suppression de tâches
