@@ -30,6 +30,21 @@ Une application web de gestion de tâches moderne pour organiser efficacement vo
 
 [Voir le projet](./To-Do_List/) | [Documentation détaillée](./To-Do_List/README.md)
 
+### 3. [Tableau de Bord Personnel](./Dashboard/)
+
+Un tableau de bord moderne pour agréger et visualiser vos données personnelles de fitness, finances et habitudes en un seul endroit.
+
+#### Fonctionnalités principales
+- Vue d'ensemble des statistiques essentielles
+- Suivi fitness avec visualisation des activités
+- Gestion des finances personnelles
+- Suivi des habitudes quotidiennes
+- Thème clair/sombre
+- Graphiques interactifs
+- Design responsive adapté à tous les appareils
+
+[Voir le projet](./Dashboard/) | [Documentation détaillée](./Dashboard/README.md)
+
 ## Technologies utilisées
 
 - **HTML5** - Structure sémantique
@@ -37,7 +52,7 @@ Une application web de gestion de tâches moderne pour organiser efficacement vo
 - **JavaScript (ES6+)** - Logique d'application et manipulation du DOM
 - **LocalStorage** - Persistance des données côté client
 - **APIs externes** - Intégration de services tiers (taux de change)
-- **Chart.js** - Visualisation de données (pour le Convertisseur de Devises)
+- **Chart.js** - Visualisation de données dynamiques
 
 ## Installation et démarrage rapide
 
@@ -70,6 +85,14 @@ Web-Projects/
 │   └── README.md
 │
 ├── To-Do_List/              # Projet de liste de tâches
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── script.js
+│   └── README.md
+│
+├── Dashboard/               # Projet de tableau de bord personnel
 │   ├── index.html
 │   ├── css/
 │   │   └── style.css
