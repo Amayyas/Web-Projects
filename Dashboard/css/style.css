@@ -1,0 +1,819 @@
+/* Variables de couleurs - Thème clair */
+:root {
+    /* Couleurs principales */
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4cc9f0;
+    
+    /* Couleurs de texte */
+    --text-color: #333;
+    --text-secondary: #666;
+    --text-light: #888;
+    
+    /* Couleurs de fond */
+    --bg-color: #f8f9fa;
+    --sidebar-bg: #fff;
+    --card-bg: #fff;
+    
+    /* Couleurs d'état */
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --info: #60a5fa;
+    
+    /* Couleurs des catégories */
+    --fitness-color: #4ade80;
+    --finance-color: #f59e0b;
+    --habits-color: #60a5fa;
+    
+    /* Couleurs d'UI */
+    --border-color: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
+    --hover-bg: #f1f5f9;
+    
+    /* Tailles */
+    --border-radius: 12px;
+    --sidebar-width: 280px;
+    --header-height: 70px;
+}
+
+/* Variables du thème sombre */
+[data-theme="dark"] {
+    /* Couleurs principales */
+    --primary-color: #7b68ee;
+    --secondary-color: #6a5acd;
+    --accent-color: #38bdf8;
+    
+    /* Couleurs de texte */
+    --text-color: #e2e8f0;
+    --text-secondary: #cbd5e1;
+    --text-light: #94a3b8;
+    
+    /* Couleurs de fond */
+    --bg-color: #111827;
+    --sidebar-bg: #1f2937;
+    --card-bg: #1f2937;
+    
+    /* Couleurs d'UI */
+    --border-color: #374151;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-hover: rgba(0, 0, 0, 0.7);
+    --hover-bg: #2d3748;
+}
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Style de la barre latérale */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.sidebar-header h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+    color: var(--primary-color);
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.user-profile h3 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+}
+
+.sidebar-nav ul li {
+    margin-bottom: 5px;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    transition: all 0.3s;
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+.sidebar-nav ul li a:hover {
+    background-color: var(--hover-bg);
+}
+
+.sidebar-nav ul li.active a {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px 0;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Style du contenu principal */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 0;
+    overflow-x: hidden;
+    transition: margin-left 0.3s;
+}
+
+/* Style de la barre supérieure */
+.top-bar {
+    height: var(--header-height);
+    padding: 0 30px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.hamburger-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.date-display {
+    display: flex;
+    align-items: center;
+}
+
+.date-display i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.user-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.refresh-btn, .notification-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    position: relative;
+    transition: color 0.3s;
+}
+
+.refresh-btn:hover, .notification-btn:hover {
+    color: var(--primary-color);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style des sections du tableau de bord */
+.dashboard-section {
+    padding: 30px;
+    display: none;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+.dashboard-section h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Style des cartes récapitulatives */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    padding: 20px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 10px 15px var(--shadow-hover);
+    transform: translateY(-5px);
+}
+
+.summary-card {
+    display: flex;
+    align-items: center;
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.fitness-icon, .steps-icon, .calories-icon, .workouts-icon {
+    background-color: var(--fitness-color);
+}
+
+.finance-icon, .income-icon, .expense-icon, .savings-icon {
+    background-color: var(--finance-color);
+}
+
+.habits-icon {
+    background-color: var(--habits-color);
+}
+
+.card-content h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.card-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.card-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Style des widgets */
+.widgets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.widget {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 15px;
+}
+
+.widget-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.widget-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.widget-action-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+}
+
+.widget-action-btn:hover {
+    color: var(--primary-color);
+}
+
+.widget-content {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+}
+
+/* Style des listes */
+.todo-list ul {
+    list-style-type: none;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid var(--border-color);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.task-item input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.task-item input[type="checkbox"]:checked::before {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task-text {
+    flex: 1;
+    color: var(--text-color);
+    transition: text-decoration 0.3s;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.task-category {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-left: 15px;
+    color: white;
+}
+
+.task-category.fitness {
+    background-color: var(--fitness-color);
+}
+
+.task-category.finance {
+    background-color: var(--finance-color);
+}
+
+.task-category.habit {
+    background-color: var(--habits-color);
+}
+
+.add-task-btn, .add-workout-btn, .add-transaction-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.add-task-btn i, .add-workout-btn i, .add-transaction-btn i {
+    margin-right: 5px;
+}
+
+.add-task-btn:hover, .add-workout-btn:hover, .add-transaction-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Style des tableaux */
+.workout-table, .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.workout-table th, .transaction-table th,
+.workout-table td, .transaction-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.workout-table th, .transaction-table th {
+    background-color: var(--hover-bg);
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.workout-table tr, .transaction-table tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transaction-table tr.income td:last-child {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.transaction-table tr.expense td:last-child {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* Style des habitudes */
+.habits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.habit-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.habit-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--habits-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.habit-content {
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--habits-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+}
+
+.habit-card.add-habit {
+    background-color: var(--hover-bg);
+    border: 2px dashed var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    justify-content: center;
+}
+
+.habit-card.add-habit:hover {
+    border-color: var(--primary-color);
+}
+
+.add-habit-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Calendrier des habitudes */
+.habit-heatmap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 15px 0;
+}
+
+/* Style des paramètres */
+.settings-card {
+    margin-bottom: 30px;
+}
+
+.settings-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.settings-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.profile-pic-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.settings-profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.change-pic-btn {
+    background-color: var(--hover-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    transition: all 0.3s;
+}
+
+.change-pic-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* Applications connectées */
+.connected-apps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app-connection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background-color: var(--hover-bg);
+}
+
+.app-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.app-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.app-details h4 {
+    margin-bottom: 5px;
+}
+
+.app-details p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.connect-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.connect-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.disconnect-btn {
+    background-color: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.disconnect-btn:hover {
+    background-color: var(--danger);
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .widgets-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .hamburger-menu {
+        display: block;
+    }
+    
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .habits-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar {
+        padding: 0 15px;
+    }
+    
+    .dashboard-section {
+        padding: 20px;
+    }
+    
+    .habits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .widget {
+        height: auto;
+        min-height: 300px;
+    }
+}
