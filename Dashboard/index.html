@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Personnel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/80" alt="Photo de profil" class="profile-pic">
+                <h3>Bienvenue, Amayyas</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#overview"><i class="fas fa-home"></i> Vue d'ensemble</a></li>
+                    <li><a href="#fitness"><i class="fas fa-running"></i> Fitness</a></li>
+                    <li><a href="#finances"><i class="fas fa-wallet"></i> Finances</a></li>
+                    <li><a href="#habits"><i class="fas fa-tasks"></i> Habitudes</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Paramètres</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Dernière mise à jour: <span id="last-update">Aujourd'hui</span></p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="date-display">
+                    <i class="far fa-calendar"></i>
+                    <span id="current-date">Chargement...</span>
+                </div>
+                <div class="user-actions">
+                    <button class="refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <button class="notification-btn">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+            </header>
+
+            <section id="overview" class="dashboard-section active">
+                <h1>Tableau de bord</h1>
+                
+                <div class="summary-cards">
+                    <div class="card summary-card">
+                        <div class="card-icon fitness-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Fitness</h3>
+                            <p class="card-value">2,456</p>
+                            <p class="card-label">Pas aujourd'hui</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon finance-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Finances</h3>
+                            <p class="card-value">1,250 €</p>
+                            <p class="card-label">Économies ce mois</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon habits-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Habitudes</h3>
+                            <p class="card-value">5/7</p>
+                            <p class="card-label">Habitudes complétées</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="widgets-container">
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Activité Hebdomadaire</h3>
+                            <div class="widget-actions">
+                                <button class="widget-action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="activity-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Répartition des Dépenses</h3>
+                            <div class="widget-actions">
+                                <button class="widget-action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="expenses-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card todo-list">
+                    <div class="widget-header">
+                        <h3>Tâches à faire</h3>
+                        <div class="widget-actions">
+                            <button class="add-task-btn"><i class="fas fa-plus"></i> Ajouter</button>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <ul id="tasks-list">
+                            <li class="task-item completed">
+                                <input type="checkbox" checked>
+                                <span class="task-text">Faire 30 minutes de course</span>
+                                <span class="task-category fitness">Fitness</span>
+                            </li>
+                            <li class="task-item">
+                                <input type="checkbox">
+                                <span class="task-text">Payer la facture d'électricité</span>
+                                <span class="task-category finance">Finance</span>
+                            </li>
+                            <li class="task-item">
+                                <input type="checkbox">
+                                <span class="task-text">Méditer pendant 10 minutes</span>
+                                <span class="task-category habit">Habitude</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="fitness" class="dashboard-section">
+                <h1>Suivi Fitness</h1>
+                
+                <div class="summary-cards">
+                    <div class="card summary-card">
+                        <div class="card-icon steps-icon">
+                            <i class="fas fa-shoe-prints"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Pas</h3>
+                            <p class="card-value">2,456</p>
+                            <p class="card-label">Objectif: 10,000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon calories-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Calories</h3>
+                            <p class="card-value">345</p>
+                            <p class="card-label">Brûlées aujourd'hui</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon workouts-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Entraînements</h3>
+                            <p class="card-value">3</p>
+                            <p class="card-label">Cette semaine</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="widgets-container">
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Activité Mensuelle</h3>
+                            <div class="widget-actions">
+                                <select id="activity-type">
+                                    <option value="steps">Pas</option>
+                                    <option value="calories">Calories</option>
+                                    <option value="workouts">Entraînements</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="fitness-monthly-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Répartition des Activités</h3>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="activity-distribution-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card workout-list">
+                    <div class="widget-header">
+                        <h3>Derniers Entraînements</h3>
+                        <div class="widget-actions">
+                            <button class="add-workout-btn"><i class="fas fa-plus"></i> Ajouter</button>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <table class="workout-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Durée</th>
+                                    <th>Calories</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>18 Mai</td>
+                                    <td>Course</td>
+                                    <td>30 min</td>
+                                    <td>320</td>
+                                </tr>
+                                <tr>
+                                    <td>16 Mai</td>
+                                    <td>Musculation</td>
+                                    <td>45 min</td>
+                                    <td>280</td>
+                                </tr>
+                                <tr>
+                                    <td>14 Mai</td>
+                                    <td>Natation</td>
+                                    <td>60 min</td>
+                                    <td>450</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="finances" class="dashboard-section">
+                <h1>Suivi Financier</h1>
+                
+                <div class="summary-cards">
+                    <div class="card summary-card">
+                        <div class="card-icon income-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Revenus</h3>
+                            <p class="card-value">2,500 €</p>
+                            <p class="card-label">Ce mois</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon expense-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Dépenses</h3>
+                            <p class="card-value">1,250 €</p>
+                            <p class="card-label">Ce mois</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon savings-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Économies</h3>
+                            <p class="card-value">1,250 €</p>
+                            <p class="card-label">Ce mois</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="widgets-container">
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Aperçu Mensuel</h3>
+                            <div class="widget-actions">
+                                <select id="finance-type">
+                                    <option value="income-expense">Revenus vs Dépenses</option>
+                                    <option value="savings">Économies</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="finance-monthly-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card widget">
+                        <div class="widget-header">
+                            <h3>Répartition des Dépenses</h3>
+                        </div>
+                        <div class="widget-content">
+                            <canvas id="expense-distribution-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card transaction-list">
+                    <div class="widget-header">
+                        <h3>Transactions Récentes</h3>
+                        <div class="widget-actions">
+                            <button class="add-transaction-btn"><i class="fas fa-plus"></i> Ajouter</button>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <table class="transaction-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Catégorie</th>
+                                    <th>Montant</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="expense">
+                                    <td>20 Mai</td>
+                                    <td>Supermarché</td>
+                                    <td>Alimentation</td>
+                                    <td>-85,42 €</td>
+                                </tr>
+                                <tr class="income">
+                                    <td>15 Mai</td>
+                                    <td>Salaire</td>
+                                    <td>Revenu</td>
+                                    <td>+2500,00 €</td>
+                                </tr>
+                                <tr class="expense">
+                                    <td>12 Mai</td>
+                                    <td>Restaurant</td>
+                                    <td>Loisirs</td>
+                                    <td>-42,50 €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="habits" class="dashboard-section">
+                <h1>Suivi des Habitudes</h1>
+                
+                <div class="habits-grid">
+                    <div class="card habit-card">
+                        <div class="habit-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="habit-content">
+                            <h3>Exercice</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%;">60%</div>
+                            </div>
+                            <p>3/5 jours cette semaine</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card habit-card">
+                        <div class="habit-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="habit-content">
+                            <h3>Lecture</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%;">85%</div>
+                            </div>
+                            <p>6/7 jours cette semaine</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card habit-card">
+                        <div class="habit-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="habit-content">
+                            <h3>Sommeil 8h</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 70%;">70%</div>
+                            </div>
+                            <p>5/7 jours cette semaine</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card habit-card">
+                        <div class="habit-icon">
+                            <i class="fas fa-meditation"></i>
+                        </div>
+                        <div class="habit-content">
+                            <h3>Méditation</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 40%;">40%</div>
+                            </div>
+                            <p>2/5 jours cette semaine</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card habit-card add-habit">
+                        <div class="add-habit-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <p>Ajouter une habitude</p>
+                    </div>
+                </div>
+                
+                <div class="card habit-calendar">
+                    <div class="widget-header">
+                        <h3>Calendrier des Habitudes</h3>
+                        <div class="widget-actions">
+                            <select id="habit-select">
+                                <option value="all">Toutes les habitudes</option>
+                                <option value="exercise">Exercice</option>
+                                <option value="reading">Lecture</option>
+                                <option value="sleep">Sommeil</option>
+                                <option value="meditation">Méditation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="habit-heatmap" id="habit-heatmap">
+                            <!-- Le heatmap sera généré par JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="settings" class="dashboard-section">
+                <h1>Paramètres</h1>
+                
+                <div class="card settings-card">
+                    <div class="settings-header">
+                        <h3>Paramètres du Profil</h3>
+                    </div>
+                    <div class="settings-content">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="username">Nom d'utilisateur</label>
+                                <input type="text" id="username" value="Utilisateur" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" value="utilisateur@example.com" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-pic">Photo de profil</label>
+                                <div class="profile-pic-container">
+                                    <img src="https://via.placeholder.com/100" alt="Photo de profil" class="settings-profile-pic">
+                                    <button type="button" class="change-pic-btn">Changer</button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn primary-btn">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card settings-card">
+                    <div class="settings-header">
+                        <h3>Objectifs</h3>
+                    </div>
+                    <div class="settings-content">
+                        <form id="goals-form">
+                            <div class="form-group">
+                                <label for="steps-goal">Objectif de pas quotidien</label>
+                                <input type="number" id="steps-goal" value="10000" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="workout-goal">Entraînements hebdomadaires</label>
+                                <input type="number" id="workout-goal" value="5" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="savings-goal">Objectif d'économies mensuel</label>
+                                <input type="number" id="savings-goal" value="500" class="form-control">
+                            </div>
+                            <button type="submit" class="btn primary-btn">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card settings-card">
+                    <div class="settings-header">
+                        <h3>Connexions aux Applications</h3>
+                    </div>
+                    <div class="settings-content">
+                        <div class="connected-apps">
+                            <div class="app-connection">
+                                <div class="app-info">
+                                    <i class="fas fa-running app-icon fitness-icon"></i>
+                                    <div class="app-details">
+                                        <h4>Application Fitness</h4>
+                                        <p>Connecté</p>
+                                    </div>
+                                </div>
+                                <button class="btn disconnect-btn">Déconnecter</button>
+                            </div>
+                            
+                            <div class="app-connection">
+                                <div class="app-info">
+                                    <i class="fas fa-wallet app-icon finance-icon"></i>
+                                    <div class="app-details">
+                                        <h4>Application Finance</h4>
+                                        <p>Connecté</p>
+                                    </div>
+                                </div>
+                                <button class="btn disconnect-btn">Déconnecter</button>
+                            </div>
+                            
+                            <div class="app-connection">
+                                <div class="app-info">
+                                    <i class="fas fa-calendar-check app-icon habits-icon"></i>
+                                    <div class="app-details">
+                                        <h4>Application Habitudes</h4>
+                                        <p>Non connecté</p>
+                                    </div>
+                                </div>
+                                <button class="btn connect-btn">Connecter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
